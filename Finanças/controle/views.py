@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Gasto
+from datetime import date
 
 def home(request):
     if request.method == 'POST':
@@ -11,9 +12,13 @@ def home(request):
             descricao=descricao
         )
         return redirect('home')
-    gastos = Gasto.objects.all()
+    hoje = date.today()
+    gastos = Gasto.objects.filter(
+        data__day=hoje.day,
+        data__month=hoje.month,
+    )
     total = sum(g.valor for g in gastos)
     return render(request,'home.html',{
         'gastos':gastos,
-        'total':total
+        'total':total,
     })

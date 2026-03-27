@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<h1 class="titulo">Controle Financeiro</h1>
+<h1 class="titulo">-Controle Financeiro-</h1>
+
 
 <div class="container">
     <h1> Meus Gastos</h1>
@@ -23,13 +24,28 @@
         <button type="submit">+</button>
     </form>
 
-    {% for g in gastos %}
-        <div class="gasto">
-            <span>{{ g.descricao }}</span>
-            <strong>R$ {{ g.valor }}</strong>
-        </div>
-    {% endfor %}
+</div>
 
+<h2>Gastos do mês</h2>
+<div class="tabela-cont">
+<table>
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for g in gastos %}
+        <tr>
+            <td>{{ g.descricao }}</td>
+            <td>R$ {{ g.valor }}</td>
+            <td>{{ g.data }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </div>
 
 </body>

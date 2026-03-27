@@ -12,7 +12,6 @@ body {
     background: rgb(1, 43, 56);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(64, 64, 231, 0.945);
     border-color: rgb(1, 43, 56);
     border-width: 2px;
     border-style: solid;
@@ -50,6 +49,7 @@ button {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    transition:all 0.25s ease;
 }
 
 button:hover {
@@ -71,4 +71,54 @@ button:hover {
     color:white;
     margin-right: 1500px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.table{
+      max-width: 600px;
+    margin: 90px auto;
+    margin-left: 20px;
+    background: rgb(1, 43, 56);
+    padding: 2px;
+    border-radius: 20px;
+    border-color: rgb(1, 43, 56);
+    border-width: 2px;
+    border-style: solid;
+    color: white;
+}
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+table{
+    background-color: rgb(1, 43, 56);
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2px;
+}
+thead{
+    background: rgb(7, 19, 90);
+    color: white;
+}
+th, td{
+    padding: 10px;
+    text-align: left;
+    color: white;
+}
+tbody tr{
+    border-bottom: 1px solid #eee;
+}
+h2{
+    color: white;
+    text-align: center;
+}
+.tabela-cont{
+    max-width: 500px;   /* largura menor */
+    margin: 20px auto;  /* centraliza */   /* evita quebrar layout */
+    margin-left: 100px;
+    
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 12px;
 }
