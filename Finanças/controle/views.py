@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Transacao
 
 def home(request):
@@ -13,15 +13,15 @@ def home(request):
             descricao=descricao
         )
         return redirect('home')
-    trasacoes = Transacao.objects.all()
+    transacoes = Transacao.objects.all()
     saldo = 0
-    for t in trasacoes:
+    for t in transacoes:
         if t.tipo == 'entrada':
             saldo +=t.valor
         else:
             saldo -=t.valor
 
     return render(request,'home.html',{
-        'transacoes':trasacoes,
+        'transacoes':transacoes,
         'saldo':saldo
     })
