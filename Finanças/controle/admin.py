@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Transacao
+from .models import Gasto
 
-admin.site.register(Transacao)
+admin.site.register(Gasto)

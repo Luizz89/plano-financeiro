@@ -1,37 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Controle Financeiro</title>
+    <title>Controle de Gastos</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<h1 class="titulo">Controle Financeiro</h1>
 
-    <h1>Controle Financeiro</h1>
+<div class="container">
+    <h1> Meus Gastos</h1>
 
-    <h2>Saldo: R$ {{ saldo }}</h2>
+    <div class="total">
+        Total: R$ {{ total }}
+    </div>
 
     <form method="POST">
         {% csrf_token %}
-        <input type="number" step="0.01" name="valor" placeholder="Valor" required>
-
-        <select name="tipo">
-            <option value="entrada">Entrada</option>
-            <option value="saida">Saída</option>
-        </select>
-
+        <input type="number" name="valor" placeholder="Valor" required>
         <input type="text" name="descricao" placeholder="Descrição" required>
-
-        <button type="submit">Add</button>
+        <button type="submit">+</button>
     </form>
 
-    <h2>Transações</h2>
+    {% for g in gastos %}
+        <div class="gasto">
+            <span>{{ g.descricao }}</span>
+            <strong>R$ {{ g.valor }}</strong>
+        </div>
+    {% endfor %}
 
-    <ul>
-        {% for t in transacoes %}
-            <li>
-                {{ t.descricao }} - R$ {{ t.valor }} ({{ t.tipo }})
-            </li>
-        {% endfor %}
-    </ul>
+</div>
 
 </body>
 </html>
