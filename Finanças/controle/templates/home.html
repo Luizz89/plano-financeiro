@@ -18,8 +18,14 @@
 
     <form method="POST">
         {% csrf_token %}
-        <input type="number" name="valor" placeholder="Valor" required>
-        <input type="text" name="descricao" placeholder="Descrição" required>
+        <input type="number" name="valor" placeholder="Valor" step="0.001" required>
+        <select class="descricao" name="descricao" required>
+            <option value="">Selecione uma descrição</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Academia">Academia</option>
+            <option value="Lazer">Lazer</option>
+        </select>
         <button type="submit">+</button>
     </form>
     </div>

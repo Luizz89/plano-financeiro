@@ -147,4 +147,8 @@ h2{
 .grafico-box{
     flex: 1;
 }
+.descricao{
+    border-radius: 5px;
+}
+
 
