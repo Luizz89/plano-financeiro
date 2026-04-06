@@ -7,6 +7,38 @@
 
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module"> import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js"; 
+  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyAk-COuyv4S_IMpR5BNIxj5TuBMEjRrUjA",
+    authDomain: "controle-de-gastos-3b673.firebaseapp.com",
+    projectId: "controle-de-gastos-3b673",
+    storageBucket: "controle-de-gastos-3b673.firebasestorage.app",
+    messagingSenderId: "317909595870",
+    appId: "1:317909595870:web:3bc5d03813358b0173b44f",
+    measurementId: "G-749YCJ1L3M"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  async function salvarTransacao(transacao) {
+    await addDoc(collection(db, "transacoes"), transacao);
+    console.log("Salvo!");
+  }
+  async function carregarTransacoes() {
+    const querySnapshot = await getDocs(collection(db, "transacoes"));
+    let lista=[];
+    querySnapshot.forEach((doc) => {
+      lista.push(doc.data());
+    });
+    console.log(lista);
+  }
+  window.salvarTransacao = salvarTransacao;
+  window.carregarTransacoes = carregarTransacoes;
+  </script>
+
 </head>
 
 <body>
@@ -16,7 +48,7 @@
     <div class="container">
         <h1> Meus Gastos</h1>
 
-    <form method="POST">
+    <form id="formGasto" onsubmit="return false;">
         {% csrf_token %}
         <input type="number" name="valor" placeholder="Valor" step="0.001" required>
         <select class="descricao" name="descricao" required>
@@ -26,8 +58,19 @@
             <option value="Academia">Academia</option>
             <option value="Lazer">Lazer</option>
         </select>
-        <button type="submit">+</button>
+        <button type="submit" id="btnSalvar">+</button>
     </form>
+    <script>
+    document.getElementById("btnSalvar").addEventListener("click", async function() {
+
+    const valor = document.querySelector('input[name="valor"]').value;
+    const descricao = document.querySelector('select[name="descricao"]').value;
+
+    const transacao = {
+        valor: parseFloat(valor),
+        descricao: descricao
+    }});
+</script>
     </div>
     <div class="layout">
     <div class="tabela-numero">
