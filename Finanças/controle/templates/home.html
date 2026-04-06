@@ -1,21 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Controle de Gastos</title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-<h1 class="titulo">-Controle Financeiro-</h1>
+    <h1 class="titulo">Controle Financeiro</h1>
 
 
-<div class="container">
-    <h1> Meus Gastos</h1>
-
-    <div class="total">
-        Total: R$ {{ total }}
-    </div>
+    <div class="container">
+        <h1> Meus Gastos</h1>
 
     <form method="POST">
         {% csrf_token %}
@@ -23,30 +22,64 @@
         <input type="text" name="descricao" placeholder="Descrição" required>
         <button type="submit">+</button>
     </form>
+    </div>
+    <div class="layout">
+    <div class="tabela-numero">
+        <table>
+            <tr>
+                <th>Valor</th>
+                <th>Descrição</th>
+            </tr>
+            {% for gasto in gastos %}
+            <tr>
+                <td>{{ gasto.valor }}</td>
+                <td>{{ gasto.descricao }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 
+<div class="grafico-box">
+    <div style="width: 400px; margin: 30px auto;">
+        <canvas id="grafico"></canvas>
+    </div>
 </div>
 
-<h2>Gastos do mês</h2>
-<div class="tabela-cont">
-<table>
-    <thead>
-        <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Data</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for g in gastos %}
-        <tr>
-            <td>{{ g.descricao }}</td>
-            <td>R$ {{ g.valor }}</td>
-            <td>{{ g.data }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</div>
+    <script id="labels-data" type="application/json">
+    {{ labels|default:"[]"|safe }}
+</script>
 
-</body>
+<script id="valores-data" type="application/json">
+    {{ valores|default:"[]"|safe }}
+</script>
+
+<script>
+    const labels = JSON.parse(document.getElementById('labels-data').textContent);
+    const data = JSON.parse(document.getElementById('valores-data').textContent);
+
+    console.log("Labels:", labels);
+    console.log("Data:", data);
+
+    const ctx = document.getElementById('grafico');
+
+    if (labels.length > 0) {
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffce56',
+                        '#4bc0c0',
+                        '#9966ff',
+                        '#ff9f40'
+                    ]
+                }]
+            }
+        });
+    }
+</script>
 </html>

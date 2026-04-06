@@ -1,18 +1,25 @@
+html,body{
+    height: 100%;
+    margin: 0;
+    scroll-behavior: smooth;
+}
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #010630;
-    margin: 0;
-    padding: 0;
+    background: #141313;
+    background: linear-gradient(180deg, rgb(10, 6, 6) 0%, rgba(8, 6, 6, 1) 35%, rgba(8, 5, 5, 1) 100%);
+    background-attachment: fixed;
+    margin: 0%;
+    padding: 0%;
 }
 
 .container {
     max-width: 600px;
     margin: 90px auto;
     margin-left: 20px;
-    background: rgb(1, 43, 56);
+    background: rgba(42, 42, 43, 0.9);    
     padding: 20px;
     border-radius: 10px;
-    border-color: rgb(1, 43, 56);
+    border-color: rgb(94, 94, 94);
     border-width: 2px;
     border-style: solid;
 }
@@ -103,7 +110,11 @@ th, td{
     padding: 10px;
     text-align: left;
     color: white;
+    border-right: 1px solid rgb(255, 255, 255);
+    border-left: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgb(255, 255, 255);
 }
+
 tbody tr{
     border-bottom: 1px solid #eee;
 }
@@ -118,7 +129,22 @@ h2{
     
 }
 
-table {
-    border-collapse: collapse;
-    border-radius: 12px;
+.tabela-numero table{
+    background-color:#04054248;
+    
 }
+.tabela-numero{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1000px;
+    margin-left: 2%;
+    box-shadow: 0px 4px 10px rgba(24, 24, 24, 0.527);
+    flex: 2;
+}
+.layout{
+    display: flex;
+    gap: 50px;
+}
+.grafico-box{
+    flex: 1;
+}
+
